@@ -10,6 +10,9 @@ import Register from "./pages/Register.jsx";
 import ProtectRoute from "./components/ProtectRoute.jsx";
 import ProductDetail, {loader as PDLoader} from './pages/ProductDetail.jsx';
 import Cart from "./pages/Cart.jsx";
+import Success from "./pages/Success.jsx";
+import Cancel from "./pages/Cancel.jsx";
+import OrdersPage, {loader as ordersLoader} from "./pages/Orders.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,6 +50,19 @@ const router = createBrowserRouter([
       {
         path: '/cart',
         element: <Cart />
+      },
+      {
+        path: '/success',
+        element: <Success />
+      },
+      {
+        path: '/cancel',
+        element: <Cancel />
+      },
+      {
+        path: '/orders',
+        loader: ordersLoader,
+        element: <OrdersPage />
       }
     ]
   }

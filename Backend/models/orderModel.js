@@ -11,7 +11,7 @@ const orderSchema = mongoose.Schema({
             ref: 'Product',
             required: [true, 'Product ID is required'],
         },
-        qty: {
+        quantity: {
             type: Number,
             required: [true, 'Quantity is required'],
             min: [1, 'Quantity cannot be less than 1'],
@@ -24,7 +24,6 @@ const orderSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'completed', 'failed', 'cancelled'],
         default: 'pending',
     },
     createdAt: {

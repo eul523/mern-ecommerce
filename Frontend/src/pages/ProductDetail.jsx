@@ -20,7 +20,7 @@ export default function ProductDetail() {
     const { product, err } = useLoaderData();
     const { isAuthenticated } = useAuthStore();
     const {addOrIncrement, items } = useCartStore();
-console.log(items);
+
     if (err) return <h1>{err}</h1>
 
     const [bigImage, setBigImage] = useState(product.images[0]);

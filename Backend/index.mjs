@@ -7,6 +7,7 @@ import authRouter from './routes/authRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import orderRouter from './routes/orderRoutes.js';
 import Image from "./models/imageModel.js";
+import checkoutRoute from './routes/checkout.js';
 
 
 
@@ -29,6 +30,7 @@ app.use(cors(corsOptions));
 app.use('/api/auth', authRouter);
 app.use('/api/products', productRouter);
 app.use('/api/orders', orderRouter);
+app.use('/api/checkout', checkoutRoute);
 
 app.get('/images/:id', async (req, res) => {
     try {

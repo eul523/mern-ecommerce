@@ -1,10 +1,15 @@
-import React from "react";
+import { useState } from "react";
 import CartCard from "../components/CartCard";
 import useCartStore from "../stores/CartStore.js";
 import StylishButton from '../components/StylishButton.jsx';
+import { handleCheckout } from "../utils.js";
+import { toast } from "react-hot-toast";
+import useAuthStore from "../stores/AuthStore.js";
 
 export default function Cart() {
     const { items, getTotal, increment, decrement, removeItem } = useCartStore();
+    const [loadingCheckout, setLoadingCheckout] = useState(false);
+    const { isAuthenticated } = useAuthStore();
 
     const totalAmount = getTotal();
 
@@ -127,7 +132,7 @@ export default function Cart() {
             </div>
 
             {/* === Checkout Summary Section === */}
-            <div className="max-w-md mx-auto mt-10 bg-white rounded-2xl shadow-lg ring-1 ring-slate-200 p-6 space-y-4">
+            {items.length>0 && <div className="max-w-md mx-auto mt-10 bg-white rounded-2xl shadow-lg ring-1 ring-slate-200 p-6 space-y-4">
                 <h2 className="text-xl font-bold text-slate-800 border-b pb-3">Order Summary</h2>
 
                 <div className="flex justify-between text-slate-700 text-sm">
@@ -145,9 +150,26 @@ export default function Cart() {
                     <span>${getTotal().toFixed(2)}</span>
                 </div>
 
-                <StylishButton hideCart={true} text="🔥 Proceed to Checkout" onClick={() => alert('Proceeding to checkout...')} className="w-full text-center" />
+                <StylishButton 
+                    disabled={loadingCheckout}
+                    hideCart={true}
+                    text={loadingCheckout ? 'Proceeding...' : "🔥 Proceed to Checkout"} 
+                    onClick={async () => {
+                        if(!isAuthenticated){
+                            return toast.error("You must be logged in to checkout.");
+                        }
+                        if (loadingCheckout) return;
+                        setLoadingCheckout(true);
+                        try{
+                            await handleCheckout(items);
+                        }catch(err){
+                            toast.error("Checkout failed: " + (err?.message || err));
+                        }
+                        setLoadingCheckout(false);
+                    }} 
+                    className="w-full text-center" />
                     
-            </div>
+            </div>}
 
         </div>
     );
