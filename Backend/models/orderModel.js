@@ -3,10 +3,10 @@ import mongoose from "mongoose";
 const orderSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        required: [true,'User id requied']
+        required: [true, 'User id requied']
     },
     products: [{
-        product: {
+        productId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
             required: [true, 'Product ID is required'],
@@ -17,11 +17,19 @@ const orderSchema = mongoose.Schema({
             min: [1, 'Quantity cannot be less than 1'],
             default: 1,
         },
-    }, ],
-
+    }],
+    sessionId: {
+        type: String,
+        required: [true, 'Session ID is required'],
+    },
     status: {
         type: String,
-        required: [true, 'Status requied']
+        enum: ['pending', 'completed', 'failed', 'cancelled'],
+        default: 'pending',
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
     },
     total: {
         type: Number,

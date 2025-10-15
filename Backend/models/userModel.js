@@ -11,7 +11,11 @@ const userSchema = mongoose.Schema({
         required: [true, "Email is required"]
     },
     password: String,
-    googleId: String
+    googleId: String,
+    isAdmin: {
+        type: Boolean,
+        default: false
+    }
 })
 
 userSchema.pre('save', async function (next) {

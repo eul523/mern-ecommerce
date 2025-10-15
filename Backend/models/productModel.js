@@ -9,14 +9,21 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    categories: {
-        type: [String],
-        default: []
+    gender: {
+        type: String,
+        required: true
+    },
+    age: {
+        type: String,
+        required: true
+    },
+    category: {
+        type: String,
+        required: [true, "Category is required"]
     },
     images: {
         type: [{
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Image"
+            type: String
         }],
         default: []
     },
@@ -24,6 +31,12 @@ const productSchema = mongoose.Schema({
     rating: Number,
     numReviews: Number
 })
+
+productSchema.index({ name: 'text', description: 'text' }); // For search
+productSchema.index({ gender: 1 }); // For gender filter
+productSchema.index({ category: 1 }); // For category filter
+productSchema.index({ price: 1 }); // For price range filter
+productSchema.index({ gender: 1, category: 1 }); // Compound index for combined filtering
 
 const Product = mongoose.model("Product", productSchema);
 

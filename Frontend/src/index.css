@@ -1,0 +1,126 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+
+.hero-section {
+  background: linear-gradient(145deg, #dbeafe 0%, #93c5fd 40%, #eff6ff 70%, #ffffff 100%);
+  background-size: 200% 200%;
+  animation: bgFlow 18s ease-in-out infinite;
+}
+
+/* Background animation for depth */
+@keyframes bgFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Text Gradient — more vibrant and readable */
+.hero-text {
+  line-height: 1.1;
+  background: linear-gradient(90deg, #1d4ed8, #6d28d9, #db2777);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textGradientFlow 8s ease infinite;
+  text-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Text shimmer effect */
+@keyframes textGradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Optional Subtext */
+.hero-subtext {
+  color: #475569;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+/* Modern button */
+.hero-btn {
+  margin-top: 2rem;
+  padding: 0.9rem 2.5rem;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(90deg, #2563eb, #7c3aed, #db2777);
+  background-size: 200% 200%;
+  cursor: pointer;
+  transition: background-position 0.5s ease, transform 0.2s ease;
+}
+
+.hero-btn:hover {
+  background-position: 100% 0%;
+  transform: translateY(-3px);
+}
+
+.arrow::after {
+  content: '›';
+  /* default */
+  display: inline-block;
+  transition: transform 0.3s ease, content 0.3s ease;
+}
+
+.hero-btn:hover .arrow::after {
+  content: '→';
+  /* changes on hover */
+  transform: translateX(5px);
+}
+
+.inter {
+  font-family: 'Inter', sans-serif;
+}
+
+.poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Custom animation class */
+.animate-fadeInUp {
+  animation: fadeInUp 1s ease-out forwards;
+}
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
