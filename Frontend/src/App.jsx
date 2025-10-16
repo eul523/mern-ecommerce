@@ -15,10 +15,13 @@ import Cancel from "./pages/Cancel.jsx";
 import OrdersPage, {loader as ordersLoader} from "./pages/Orders.jsx";
 import CategoriesPage, {loader as categoriesLoader} from "./pages/Categories.jsx";
 import About from "./pages/About.jsx";
+import ErrorElement from "./pages/ErrorElement.jsx";
+import NotFound from "./pages/404.jsx";
 
 const router = createBrowserRouter([
   {
     path: '/',
+    errorElement: <ErrorElement />,
     element: <Layout />,
     children: [
       {
@@ -74,6 +77,10 @@ const router = createBrowserRouter([
       {
         element: <About />,
         path: '/about'
+      },
+      {
+        path: '*',
+        element: <NotFound />
       }
     ]
   }
