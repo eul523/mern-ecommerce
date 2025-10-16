@@ -6,31 +6,33 @@ import CircularProgress from "@mui/material/CircularProgress";
 import useCartStore from "../stores/CartStore.js";
 
 export default function Header() {
-    const { isAuthenticated, user, logout, isLoading} = useAuthStore();
+    const { isAuthenticated, user, logout, isLoading } = useAuthStore();
     const { items } = useCartStore();
     return (
         <header className=" z-999 h-[50px] w-full m-0 mb-[50px] flex justify-between items-center fixed top-0 left-0 right-0 backdrop-blur-sm">
-            <Link 
-               to='/' 
-               className="text-2xl font-bold text-gray-800 flex items-center h-full px-4 gap-2"
+            <Link
+                to='/'
+                className="text-2xl font-bold text-gray-800 flex items-center h-full px-4 gap-2"
             >Cartify</Link>
 
-            <HeaderNav/>
+            <HeaderNav showOrders={isAuthenticated}/>
 
             <div className="flex items-center gap-4 h-full px-4">
-                <Link 
+                <Link
                     to='/cart'
                     className="relative"
                 >
-                    <ShoppingCart size={20}/>
+                    <ShoppingCart size={20} />
                     <p className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">{items.length}</p>
                 </Link>
                 {isAuthenticated ? (
                     <>
-                    <p>{user.name}</p>
-                    <button className="underline hover:text-red-600 " onClick={logout}>{isLoading ? <CircularProgress size={15}/> : 'Logout'}</button>
+                        <span className="hidden sm:inline-block text-sm font-semibold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors cursor-pointer">
+                            {user?.name || 'Guest'}
+                        </span>
+                        <button className="underline hover:text-red-600 text-sm" onClick={logout}>{isLoading ? <CircularProgress size={15} /> : 'Logout'}</button>
                     </>
-                    
+
                 ) : (
                     <Link className="bg-blue-600 hover:bg-blue-600/90 px-4 py-2 text-white rounded-full" to='/login'>Login</Link>
                 )}

@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router';
 import { motion } from 'framer-motion';
 
-const HeaderNav = () => {
+const HeaderNav = ({showOrders = false}) => {
   // Animation variants for nav items
   const navItemVariants = {
     hidden: { opacity: 0, y: -20 },
@@ -38,6 +38,9 @@ const HeaderNav = () => {
     { to: '/category/men', label: 'Collections' },
     { to: '/about', label: 'About' },
   ];
+  if (showOrders) {
+    navLinks.push({ to: '/orders', label: 'Orders' });
+  }
 
   return (
     <div className="sm:text-lg font-medium flex items-center sm:gap-6 md:gap-8">
