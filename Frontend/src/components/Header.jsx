@@ -28,11 +28,11 @@ export default function Header() {
                 {isAuthenticated ? (
                     <>
                     <p>{user.name}</p>
-                    <button onClick={logout}>{isLoading ? <CircularProgress size={15}/> : 'Logout'}</button>
+                    <button className="underline hover:text-red-600 " onClick={logout}>{isLoading ? <CircularProgress size={15}/> : 'Logout'}</button>
                     </>
                     
                 ) : (
-                    <Link to='/login'>Login</Link>
+                    <Link className="bg-blue-600 hover:bg-blue-600/90 px-4 py-2 text-white rounded-full" to='/login'>Login</Link>
                 )}
             </div>
         </header>

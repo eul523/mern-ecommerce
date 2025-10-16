@@ -13,6 +13,8 @@ import Cart from "./pages/Cart.jsx";
 import Success from "./pages/Success.jsx";
 import Cancel from "./pages/Cancel.jsx";
 import OrdersPage, {loader as ordersLoader} from "./pages/Orders.jsx";
+import CategoriesPage, {loader as categoriesLoader} from "./pages/Categories.jsx";
+import About from "./pages/About.jsx";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +65,15 @@ const router = createBrowserRouter([
         path: '/orders',
         loader: ordersLoader,
         element: <OrdersPage />
+      },
+      {
+        path: '/category/:category',
+        loader: categoriesLoader,
+        element: <CategoriesPage />
+      },
+      {
+        element: <About />,
+        path: '/about'
       }
     ]
   }

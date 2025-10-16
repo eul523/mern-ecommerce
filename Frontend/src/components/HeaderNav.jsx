@@ -35,7 +35,7 @@ const HeaderNav = () => {
 
   const navLinks = [
     { to: '/', label: 'Home' },
-    { to: '/collections', label: 'Collections' },
+    { to: '/category/men', label: 'Collections' },
     { to: '/about', label: 'About' },
   ];
 
@@ -56,7 +56,7 @@ const HeaderNav = () => {
               <>
                 <span
                   className={`relative px-2 py-1 transition-colors duration-300 ${
-                    isActive
+                    (isActive || (link.label === 'Collections' && window.location.pathname.startsWith('/category')))
                       ? 'text-gray-800 font-semibold'
                       : 'text-gray-700 hover:text-gray-800'
                   }`}
@@ -67,7 +67,7 @@ const HeaderNav = () => {
                 <motion.span
                   className="absolute bottom-0 left-0 h-0.5 bg-gray-500 rounded-full"
                   initial="hidden"
-                  animate={isActive ? 'visible' : 'hidden'}
+                  animate={(isActive || (link.label === 'Collections' && window.location.pathname.startsWith('/category'))) ? 'visible' : 'hidden'}
                   variants={underlineVariants}
                 />
               </>

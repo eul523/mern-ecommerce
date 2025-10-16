@@ -113,4 +113,54 @@ router.get('/:id', asyncHandler(async (req, res) => {
     return res.json(product);
 }))
 
+router.get('/category/:category', asyncHandler(async (req, res) => {
+    const { category } = req.params;
+    const { sort = 'relevance', age } = req.query;
+
+    // Validate category
+    const validCategories = ['men', 'women', 'children'];
+    if (!validCategories.includes(category.toLowerCase())) {
+        return res.status(400).json({ msg: 'Invalid category. Must be men, women, or children.' });
+    }
+
+    // Base filter
+    let filter = {};
+    if (category === 'men') filter = { gender: 'men', age: 'adult' };
+    else if (category === 'women') filter = { gender: 'women', age: 'adult' };
+    else if (category === 'children') {
+        // Allow boys/girls filter for children
+        if (age && ['men', 'women'].includes(age.toLowerCase())) {
+            filter = { age: 'children', gender: age }; // 'boys' -> 'boy', 'girls' -> 'girl'
+        } else {
+            filter = { age: 'children' };
+        }
+    }
+
+    // Sorting logic
+    let sortOption = {};
+    switch (sort) {
+        case 'price-low':
+            sortOption = { price: 1 };
+            break;
+        case 'price-high':
+            sortOption = { price: -1 };
+            break;
+        case 'latest':
+            sortOption = { createdAt: -1 };
+            break;
+        default:
+            sortOption = {}; 
+    }
+
+    const products = await Product.find(filter).sort(sortOption);
+
+    res.json({
+        category,
+        sort,
+        filterApplied: { ...filter },
+        products
+    });
+}));
+
+
 export default router;

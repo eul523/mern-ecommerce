@@ -29,7 +29,7 @@ export default function Home() {
                         Discover fashion that blends comfort, confidence, and creativity
                     </h1>
 
-                    <Link to='/collections' class="hero-btn flex items-center gap-2 w-fit">
+                    <Link to='/category/men' class="hero-btn flex items-center gap-2 w-fit">
                         Collections
                         <span class="arrow inline"></span>
                     </Link>
