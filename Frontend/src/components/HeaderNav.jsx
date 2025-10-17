@@ -43,7 +43,7 @@ const HeaderNav = ({showOrders = false}) => {
   }
 
   return (
-    <div className="sm:text-lg font-medium flex items-center sm:gap-6 md:gap-8">
+    <div className="sm:text-lg font-medium flex items-center sm:gap-6 md:gap-8 max-w-[50vw] sm:max-w-[70vw] overflow-x-scroll overflow-y-hidden sm:overflow-x-hidden scroll-container">
       {navLinks.map((link, index) => (
         <motion.div
           key={link.to}
@@ -58,7 +58,7 @@ const HeaderNav = ({showOrders = false}) => {
             {({ isActive }) => (
               <>
                 <span
-                  className={`relative px-2 py-1 transition-colors duration-300 ${
+                  className={`relative px-2 py-1 transition-colors duration-300 text-sm sm:text-lg ${
                     (isActive || (link.label === 'Collections' && window.location.pathname.startsWith('/category')))
                       ? 'text-gray-800 font-semibold'
                       : 'text-gray-700 hover:text-gray-800'

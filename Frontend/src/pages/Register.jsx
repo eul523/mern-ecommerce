@@ -19,7 +19,7 @@ export default function Register() {
 
     const onSubmit = async (data) => {
         try {
-            await registerAuth(data.email, data.password);
+            await registerAuth(data.name, data.email, data.password);
             navigate(redirectTo);
         } catch (err) {
             console.error(err);

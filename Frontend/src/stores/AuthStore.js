@@ -19,10 +19,10 @@ const useAuthStore = create((set) => ({
       throw err;
     }
   },
-  register: async ( email, password) => {
+  register: async (name, email, password) => {
     set({ isLoading: true });
     try {
-      const response = await api.post('/auth/register', { email, password });
+      const response = await api.post('/auth/register', { name, email, password });
       set({ user: response.data.user, isAuthenticated: true, isLoading: false });
       return response.data;
     } catch (err) {

@@ -124,3 +124,28 @@
     transform: translateX(100%);
   }
 }
+
+.scroll-container {
+  scrollbar-width: thin;             /* For Firefox */
+  scrollbar-color: #aaa transparent; /* For Firefox */
+  position: relative;
+}
+
+/* Chrome, Edge, Safari */
+.scroll-container::-webkit-scrollbar {
+  height: 6px;       /* 👈 Thinner scrollbar */
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #aaa;
+  border-radius: 3px;
+}
+
+/* Hide vertical scrollbar entirely */
+.scroll-container::-webkit-scrollbar:vertical {
+  display: none;
+}
