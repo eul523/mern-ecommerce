@@ -33,7 +33,7 @@ export default function Header() {
                 </Link>
                 <div className="relative w-fit">
                     <button className="w-full" onClick={() => setShowPopup(!showPopup)} ref={profileRef}>
-                        <img src={profileImage} alt="Profile" className="w-8 aspect-square rounded-full object-cover" />
+                        <img src={profileImage} alt="Profile" className="w-[35px] aspect-square rounded-full object-cover" />
                     </button>
                     {showPopup && <ProfilePopup name={user?.name || "User"} setShowPopup={setShowPopup} profileRef={profileRef} />}
                 </div>
