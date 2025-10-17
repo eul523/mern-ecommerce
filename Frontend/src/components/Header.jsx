@@ -31,9 +31,9 @@ export default function Header() {
                     <ShoppingCart size={20} />
                     <p className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">{items.length}</p>
                 </Link>
-                <div className="relative">
-                    <button onClick={() => setShowPopup(!showPopup)} ref={profileRef}>
-                        <img src={profileImage} alt="Profile" className="w-8 h-8 rounded-full object-cover" />
+                <div className="relative w-fit">
+                    <button className="w-full" onClick={() => setShowPopup(!showPopup)} ref={profileRef}>
+                        <img src={profileImage} alt="Profile" className="w-8 aspect-square rounded-full object-cover" />
                     </button>
                     {showPopup && <ProfilePopup name={user?.name || "User"} setShowPopup={setShowPopup} profileRef={profileRef} />}
                 </div>
